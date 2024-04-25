@@ -13,6 +13,16 @@ arbol.insertar(25)
 arbol.insertar(50)
 arbol.insertar(5)
 
+arbol2 = ArbolBST()
+arbol2.insertar(20)
+arbol2.insertar(15)
+arbol2.insertar(33)
+arbol2.insertar(10)
+arbol2.insertar(18)
+arbol2.insertar(25)
+arbol2.insertar(50)
+arbol2.insertar(5)
+
 
 # print(arbol.buscar(5))  # Output: True
 # print(arbol.buscar(7))  # Output: False
@@ -23,6 +33,7 @@ arbol.postorden()
 
 # Dibujar el árbol
 arbol.dibujar()
+arbol2.dibujar()
 
 print("")
 print("---------------------")
@@ -62,13 +73,66 @@ def mostrar_hojas(nodo):
 mostrar_hojas(arbol.raiz)
 
 
-# Ejemplo de uso
-arbolAv = ArbolAVL()
-arbolAv.insertar_valor(10)
-arbolAv.insertar_valor(20)
-arbolAv.insertar_valor(5)
-arbolAv.insertar_valor(15)
-arbolAv.insertar_valor(18)
-arbolAv.insertar_valor(25)
-arbolAv.pre_order(arbol.raiz)
-arbolAv.dibujar()
+print("")
+print("---------------------")
+print("")
+
+# ejercicio #03 - 9 punto
+
+
+def indicar_si_dos_arboles_son_iguales(Nodo1, Nodo2):
+    if Nodo1 is None and Nodo2 is None:
+        return True
+    if Nodo1 is not None and Nodo2 is not None:
+        if (Nodo1.valor == Nodo2.valor):
+            return print("los arboles son iguales") and indicar_si_dos_arboles_son_iguales(Nodo1.izquierda, Nodo2.izquierda) and indicar_si_dos_arboles_son_iguales(Nodo1.derecha, Nodo2.derecha)
+        else:
+            print("Los árboles no son iguales")
+            return False
+
+
+indicar_si_dos_arboles_son_iguales(arbol.raiz, arbol2.raiz)
+
+
+print("")
+print("---------------------")
+print("")
+
+# ejercicio #04 - 15 punto
+
+
+def cuantas_veces_se_encuentra_un_dato_especifico(nodo, valor):
+    if nodo is None:
+        return 0
+    if nodo.valor == valor:
+        return 1 + cuantas_veces_se_encuentra_un_dato_especifico(nodo.izquierda, valor) + cuantas_veces_se_encuentra_un_dato_especifico(nodo.derecha, valor)
+    else:
+        return cuantas_veces_se_encuentra_un_dato_especifico(nodo.izquierda, valor) + cuantas_veces_se_encuentra_un_dato_especifico(nodo.derecha, valor)
+
+
+veces = cuantas_veces_se_encuentra_un_dato_especifico(arbol.raiz, 20)
+print(veces)
+
+print("")
+print("---------------------")
+print("")
+
+# ejercicio #05 - 20 punto
+
+
+def Dados_dos_nodos_intercambiar_sus_datos(nodo1, nodo2):
+    if nodo1 is None and nodo2 is None:
+        return
+    if nodo1 is not None and nodo2 is not None:
+        temporal = nodo1.valor
+        nodo1.valor = nodo2.valor
+        nodo2.valor = temporal
+        return Dados_dos_nodos_intercambiar_sus_datos(nodo1.izquierda, nodo2.izquierda) and Dados_dos_nodos_intercambiar_sus_datos(nodo1.derecha, nodo2.derecha)
+    # no se como mostrarlos en el arbol
+
+
+Dados_dos_nodos_intercambiar_sus_datos(arbol.raiz, arbol2.raiz)
+
+print("")
+print("---------------------")
+print("")
