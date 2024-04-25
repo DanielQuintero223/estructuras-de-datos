@@ -1,4 +1,5 @@
 from Modelos.ArbolBST import ArbolBST
+from Modelos.arbolesalv import ArbolAVL
 
 
 # Ejemplo de uso
@@ -59,3 +60,15 @@ def mostrar_hojas(nodo):
 
 
 mostrar_hojas(arbol.raiz)
+
+
+# Ejemplo de uso
+arbolAv = ArbolAVL()
+arbolAv.insertar_valor(10)
+arbolAv.insertar_valor(20)
+arbolAv.insertar_valor(5)
+arbolAv.insertar_valor(15)
+arbolAv.insertar_valor(18)
+arbolAv.insertar_valor(25)
+arbolAv.pre_order(arbol.raiz)
+arbolAv.dibujar()
