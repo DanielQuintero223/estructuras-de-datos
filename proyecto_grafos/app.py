@@ -259,9 +259,7 @@ class App(tk.Tk):
         for vehicle in vehiculos_policiales:
             for index, nodo_actual in enumerate(recorrido[:-1]):
                 siguiente_nodo = recorrido[index + 1]
-                if arbol_principal.get_dinero(nodo_actual) == 0:
-                    messagebox.showerror("Error", f"El {nodo_actual} no tiene dinero para recolectar.")
-                    return
+                    
                 
                 # Si llega al banco principal, depositar el dinero
                 if siguiente_nodo == "banco principal":
@@ -274,6 +272,7 @@ class App(tk.Tk):
                         for i, nombre in enumerate([self.nombre_entries[0].get(), self.nombre_entries[1].get(), self.nombre_entries[2].get()]):
                             dinero_punto = arbol_principal.obtener_dinero_nodo(nombre)
                             messagebox.showinfo("Resultados de la simulacion", f"El {nombre} ahora tiene {dinero_punto} Dolares.")
+                        return
                             
                     else:
                         messagebox.showwarning("Simulación incompleta", f"Faltan por recolectar {dinero_a_recolectar} unidades de dinero.")
@@ -295,7 +294,6 @@ class App(tk.Tk):
                     if vehicle.get_tipo_vehiculo() == "Furgoneta":
                         if self.convert_money_to_weight(dinero_nodo) < vehicle.get_peso():
                             vehicle.set_dinero_recogido(dinero_nodo)
-                            print(nodo_actual, siguiente_nodo)
                             vehicle.set_peso(vehicle.get_peso() - self.convert_money_to_weight(dinero_nodo))
                             recoleccion += dinero_nodo
                             recoleccion_por_nodo = dinero_nodo
@@ -323,10 +321,6 @@ class App(tk.Tk):
                     
                     
                                 
-
-
-
-
     @staticmethod
     def convert_money_to_weight(money):
         return money / 10000  # 1 tonelada por cada 10,000 unidades de dinero
@@ -335,64 +329,3 @@ class App(tk.Tk):
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-
-
-
-
-
-    # def simulate(self):
-    #     if not vehiculos_policiales:
-    #         messagebox.showerror("Error", "No hay vehículos disponibles.")
-    #         return
-        
-    #     recorrido = ["centro principal ", self.nombre_entries[0].get(), self.nombre_entries[1].get(), self.nombre_entries[2].get(), "banco principal"]
-    #     dinero_a_recolectar = float(self.recoleccion_entry.get())
-    #     while dinero_a_recolectar > 0:
-    #         for vehicle in vehiculos_policiales:
-    #             for index, i in enumerate(recorrido):
-    #                 nodo_actual = i
-    #                 siguiente_nodo = recorrido[index + 1]
-                    
-    #                 # si esta en el banco principal almacenar el dinero en el banco y vaciar el vehiculo
-    #                 if siguiente_nodo == "banco principal":
-    #                     banco_principal.set_dinero_guardado(banco_principal.get_dinero_guardado() + vehicle.get_dinero_recogido())
-    #                     vehicle.set_dinero_recogido(0)
-    #                     vehicle.set_peso(vehicle.get_peso())
-    #                     return
-
-    #                 peso_actual = arbol_principal.obtener_peso_nodo(nodo_actual)
-    #                 peso_siguiente = arbol_principal.obtener_peso_nodo(siguiente_nodo)
-    #                 arista_peso = peso_actual + peso_siguiente
-
-    #                 if vehicle.get_peso() > arista_peso:
-    #                     messagebox.showerror("Error", f"El puente entre {nodo_actual} y {siguiente_nodo} colapsará.")
-    #                     return
-                    
-
-    #                 dinero_nodo = arbol_principal.obtener_dinero_nodo(siguiente_nodo)
-    #                 while vehicle.get_peso() > 0 :
-    #                     if vehicle.get_tipo_vehiculo() == "Furgoneta":
-    #                         if self.convert_money_to_weight(dinero_nodo) > vehicle.get_peso():
-    #                             vehicle.set_dinero_recogido(80000)
-    #                             vehicle.set_peso(vehicle.get_peso() - self.convert_money_to_weight(80000))
-    #                             dinero_a_recolectar -= 80000
-    #                     elif vehicle.get_tipo_vehiculo() == "Camioneta":
-    #                         if self.convert_money_to_weight(dinero_nodo) > vehicle.get_peso():
-    #                             vehicle.set_dinero_recogido(40000)
-    #                             vehicle.set_peso(vehicle.get_peso() - self.convert_money_to_weight(40000))
-    #                             dinero_a_recolectar -= 40000
-    #                     elif vehicle.get_tipo_vehiculo() == "Moto":
-    #                         messagebox.showinfo("la moto no puede llevar dinero")
-                    
-            
-                
-    #                 arbol_principal.set_dinero(nodo_actual, arbol_principal.get_dinero(nodo_actual) - dinero_nodo)
-                
-        
-
-    #     messagebox.showinfo("Simulación completada", f"Vehículo {vehicle.get_tipo_vehiculo()} ha completado la recolección ")
-    #     messagebox.showinfo("Simulación completada", f"El banco principal ahora tiene {banco_principal.get_dinero_guardado()} Dolares.")
-    #     messagebox.showinfo("Simulación completada", f"El centro principal ahora tiene {centro_principal.get_dinero_guardado()} Dolares.")
-    #     messagebox.showinfo("Simulación completada", f"El punto de recolección 1 ahora tiene {arbol_principal.get_dinero('punto recoleccion 1')} Dolares.")
-    #     messagebox.showinfo("Simulación completada", f"El punto de recolección 2 ahora tiene {arbol_principal.get_dinero('punto recoleccion 2')} Dolares.")
-    #     messagebox.showinfo("Simulación completada", f"El punto de recolección 3 ahora tiene {arbol_principal.get_dinero('punto recoleccion 3')} Dolares.")
